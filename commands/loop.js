@@ -1,9 +1,9 @@
 module.exports.run = async (client, message, args, queue, searcher) => {
     const serverQueue = queue.get(message.guild.id)
     if(!serverQueue)
-        return message.channel.send("There is no music playing!");
+        return message.channel.send("Music xde nak ape lagi? Isap kote ke!");
     if(message.member.voice.channel != message.guild.me.voice.channel)
-        return message.channel.send("You need to join the voice chat first!")
+        return message.channel.send("Ni vc xjoin nak music ape nii!")
 
 switch(args[0].toLowerCase()){
     case 'all':
@@ -11,9 +11,9 @@ switch(args[0].toLowerCase()){
         serverQueue.loopone = false;
 
         if(serverQueue.loopall === true)
-            message.channel.send("Loop all has been turned on!");
+            message.channel.send("Nak loop loop semua ke? Ok bodo! Duk loop dah!");
         else
-            message.channel.send("Loop all has been turned off!");
+            message.channel.send("Xmau loop semua?Ok, dah tutup kote bapak ang!");
         break;
 
     case 'one':
@@ -21,16 +21,16 @@ switch(args[0].toLowerCase()){
         serverQueue.loopall = false;
 
         if(serverQueue.loopone === true)
-            message.channel.send("Loop one has been turned on!");
+            message.channel.send("Nak loop loop satu ke? Ok bodo! Duk loop dah!");
         else
-            message.channel.send("Loop one has been turned off!");
+            message.channel.send("Xmau loop satu?Ok, dah tutup kote bapak ang!");
         break;
 
     case 'off':
         serverQueue.loopall = false;
         serverQueue.loopone = false;
 
-        message.channel.send("Loop has been turned off!");
+        message.channel.send("Ok lah loop dah tutup! ISHHH!");
         break;
 
     default:

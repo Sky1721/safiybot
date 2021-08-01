@@ -5,7 +5,7 @@ const Discord = require('discord.js')
 module.exports.run = async (client, message, args, queue, searcher) => {
     const vc = message.member.voice.channel;
     if(!vc)
-        return message.channel.send("Please join a voice channel first!");
+        return message.channel.send("Ni vc xjoin nak music ape nii!");
 
     let url = args.join("");
     if(url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)){
@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, queue, searcher) => {
     else{
         let result = await searcher.search(args.join(" "), { type: "video"})
         if(result.first == null)
-            return message.channel.send("There are no results found!");
+            return message.channel.send("Xde Xde tak jumpa!");
 
         let songInfo = await ytdl.getInfo(result.first.url);
         return videoHandler(songInfo, message, vc)
@@ -56,7 +56,7 @@ module.exports.run = async (client, message, args, queue, searcher) => {
         }catch (err){
             console.error(err);
             queue.delete(message.guild.id);
-            return message.channel.send(`Unable to join the voice chat ${err}`)
+            return message.channel.send(`Cannot join the voice chat ${err}`)
         }
     }else{
         serverQueue.songs.push(song);
