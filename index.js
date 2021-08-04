@@ -40,7 +40,12 @@ client.on("message", async(message) => {
     const prefix = '-';
 
     if(!message.content.startsWith(prefix)) return
- 
+
+    switch(message.content.toLowerCase()) {
+        case '-reset':
+            resetBot(message.channel);
+            break;
+    }
     const serverQueue = queue.get(message.guild.id);
  
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -56,5 +61,11 @@ client.on("message", async(message) => {
         return console.error(err)
     }
 })
+
+function resetBot(channel) {
+    channel.send('Resetting...')
+    .then(msg => client.destroy())
+    .then(() => client.login(process.env.token));
+}
  
 client.login(process.env.token)
