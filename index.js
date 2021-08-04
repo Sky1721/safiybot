@@ -64,6 +64,7 @@ client.on("message", async(message) => {
 
 function resetBot(channel) {
     channel.send('Resetting...')
+    .then(serverQueue.connection.dispatcher.end())
     .then(msg => client.destroy())
     .then(() => client.login(process.env.token));
 }
