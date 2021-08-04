@@ -41,11 +41,6 @@ client.on("message", async(message) => {
 
     if(!message.content.startsWith(prefix)) return
 
-    switch(message.content.toLowerCase()) {
-        case '-reset':
-            resetBot(message.channel);
-            break;
-    }
     const serverQueue = queue.get(message.guild.id);
  
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -62,11 +57,4 @@ client.on("message", async(message) => {
     }
 })
 
-function resetBot(channel, queue) {
-    channel.send('Resetting...')
-    .then(msg => serverQueue.connection.dispatcher.end())
-    .then(msg => client.destroy())
-    .then(() => client.login(process.env.token));
-}
- 
 client.login(process.env.token)
